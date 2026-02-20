@@ -8,3 +8,6 @@ environments.json
 test/performance-results.md
 test/comparison-results.md
 test/real-comparison-results.md
+test/compare.ts
+test/real-compare.ts
+test/mcp-client.ts
