@@ -1,14 +1,14 @@
 # Healthie Dev Assist 2.0
 
-A high-performance MCP server that connects AI assistants to Healthie's GraphQL API using **Code Mode** — a new approach where the AI writes and executes code instead of making one tool call at a time.
+A high-performance MCP server that connects AI assistants to Healthie's GraphQL API. Instead of one tool call at a time, the AI writes and executes code that performs multiple operations in a single turn.
 
 ## What's New in 2.0
 
 The original Healthie Dev Assist exposed Healthie's GraphQL schema directly to your AI tool. This worked, but required many back-and-forth turns: search for a type, wait, introspect it, wait, build a query, wait, execute it, wait.
 
-**2.0 introduces Code Mode.** Instead of one tool call per operation, your AI writes a small TypeScript program that performs all the steps in a single execution — searching the schema, introspecting types, and running queries in one shot.
+**Dev Assist 2.0** changes the execution model. Instead of one tool call per operation, your AI writes a small TypeScript program that performs all the steps in a single execution — searching the schema, introspecting types, and running queries in one shot.
 
-| | v1 | v2 (Code Mode) |
+| | v1 | v2 |
 |---|---|---|
 | Turns to complete a typical task | 5–10 | 1–2 |
 | Schema exploration | One call at a time | Search + introspect + query in one execution |
