@@ -88,14 +88,6 @@ Restart Claude Desktop after this runs.
 
 ### 5. Connect your AI tool (non-Desktop)
 
-#### Claude Desktop
-
-```bash
-npm run setup
-```
-
-Then restart Claude Desktop. That's it — the script finds your config file and adds the entry automatically.
-
 #### Claude Code (CLI)
 
 ```bash
