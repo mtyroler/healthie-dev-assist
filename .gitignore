@@ -1,0 +1,10 @@
+CLAUDE.md
+TODO.md
+node_modules/
+dist/
+schemas/
+.env
+environments.json
+test/performance-results.md
+test/comparison-results.md
+test/real-comparison-results.md

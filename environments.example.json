@@ -1,0 +1,10 @@
+{
+  "production": {
+    "apiUrl": "https://api.gethealthie.com/graphql",
+    "apiKey": "YOUR_PRODUCTION_API_KEY"
+  },
+  "staging": {
+    "apiUrl": "https://staging-api.gethealthie.com/graphql",
+    "apiKey": "YOUR_STAGING_API_KEY"
+  }
+}

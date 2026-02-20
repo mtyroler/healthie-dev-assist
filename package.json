@@ -1,0 +1,26 @@
+{
+  "name": "healthie-dev-assist",
+  "version": "1.0.0",
+  "description": "Healthie Dev Assist — Code Mode MCP Server",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "tsx src/server.ts",
+    "build": "tsc",
+    "setup": "tsx setup.ts",
+    "regenerate-schema": "tsx regenerate-schema.ts",
+    "test": "tsx test/functional.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "dotenv": "^16.4.7",
+    "graphql": "^16.10.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
