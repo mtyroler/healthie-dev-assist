@@ -14,6 +14,7 @@ import {
 import { resolve, dirname } from "path";
 import { homedir } from "os";
 import { execSync } from "child_process";
+import { createInterface } from "readline";
 
 const projectRoot = resolve(import.meta.dirname);
 const startScriptPath = resolve(projectRoot, "start-mcp.sh");
@@ -175,12 +176,48 @@ for (const file of oldSchemaFiles) {
   }
 }
 
-// ── Final message ────────────────────────────────────────────────────────────
+// ── Prompt for API key if needed ─────────────────────────────────────────────
 
-if (!existsSync(resolve(projectRoot, ".env"))) {
-  console.log(
-    "\nNext: copy .env.example to .env and add your HEALTHIE_API_KEY"
+const dotEnvPath = resolve(projectRoot, ".env");
+const dotEnvExamplePath = resolve(projectRoot, ".env.example");
+
+function needsApiKey(): boolean {
+  if (!existsSync(dotEnvPath)) return true;
+  const content = readFileSync(dotEnvPath, "utf-8");
+  return (
+    !content.includes("HEALTHIE_API_KEY=") ||
+    content.includes("your_api_key_here") ||
+    content.includes("your-api-key-here")
   );
-} else {
-  console.log("\nRestart Claude Desktop to apply changes.");
 }
+
+if (needsApiKey()) {
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await new Promise<string>((res) =>
+    rl.question("\nEnter your Healthie Staging API Key: ", (ans) => {
+      rl.close();
+      res(ans.trim());
+    })
+  );
+
+  if (answer) {
+    let envContent: string;
+    if (existsSync(dotEnvExamplePath)) {
+      envContent = readFileSync(dotEnvExamplePath, "utf-8");
+      envContent = envContent.replace(
+        /HEALTHIE_API_KEY=.*/,
+        `HEALTHIE_API_KEY=${answer}`
+      );
+    } else {
+      envContent = `HEALTHIE_API_KEY=${answer}\n`;
+    }
+    writeFileSync(dotEnvPath, envContent);
+    console.log(".env configured.");
+  } else {
+    console.log(
+      "\nNo key entered. Copy .env.example to .env and add your HEALTHIE_API_KEY manually."
+    );
+  }
+}
+
+console.log("\nRestart Claude Desktop to apply changes.");
