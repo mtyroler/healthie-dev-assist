@@ -65,7 +65,7 @@ healthie.mutate(graphql: string, variables?: Record<string, unknown>) → any
 
 ## Quick Start
 
-### 1. Clone and install
+### 1. Clone & install
 
 ```bash
 git clone https://github.com/healthie/healthie-dev-assist.git
@@ -73,28 +73,7 @@ cd healthie-dev-assist
 npm install
 ```
 
-### 2. Configure your API key
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env`:
-```
-HEALTHIE_API_KEY=your-api-key-here
-```
-
-> Schema search and introspection work without a key. `query` and `mutate` require one.
-
-### 3. Download the schema
-
-```bash
-npm run regenerate-schema
-```
-
-Fetches Healthie's GraphQL schema and caches it locally. Re-run after API updates.
-
-### 4. Connect your AI tool
+### 2. Connect your AI tool
 
 <details>
 <summary><strong>Claude Desktop</strong></summary>
@@ -103,7 +82,7 @@ Fetches Healthie's GraphQL schema and caches it locally. Re-run after API update
 npm run setup
 ```
 
-Restart Claude Desktop after this runs.
+This single command prompts for your API key, downloads the schema, and registers the MCP server. Restart Claude Desktop after.
 
 </details>
 
@@ -111,17 +90,22 @@ Restart Claude Desktop after this runs.
 <summary><strong>Claude Code (CLI)</strong></summary>
 
 ```bash
-claude mcp add healthie -- npx tsx /path/to/healthie-dev-assist/src/server.ts
+npm run setup
+claude mcp add healthie-dev-assist -- npx tsx /absolute/path/to/healthie-dev-assist/src/server.ts
 ```
 
-Verify with `claude mcp list`.
+`npm run setup` prompts for your API key and downloads the schema. Verify with `claude mcp list`.
 
 </details>
 
 <details>
 <summary><strong>Cursor</strong></summary>
 
-Add to Cursor's MCP settings:
+```bash
+npm run setup
+```
+
+Then add to Cursor's MCP settings:
 
 ```json
 {
@@ -129,7 +113,7 @@ Add to Cursor's MCP settings:
     "servers": {
       "healthie-dev-assist": {
         "command": "npx",
-        "args": ["tsx", "/path/to/healthie-dev-assist/src/server.ts"]
+        "args": ["tsx", "/absolute/path/to/healthie-dev-assist/src/server.ts"]
       }
     }
   }
@@ -145,9 +129,11 @@ Add to Cursor's MCP settings:
 npm run build
 ```
 
-Then use `node /path/to/healthie-dev-assist/dist/server.js` in place of `npx tsx ...` in any config above.
+Then use `node /absolute/path/to/healthie-dev-assist/dist/server.js` in place of `npx tsx ...` in any config above.
 
 </details>
+
+> **Note:** Schema search and introspection work without a key. `query` and `mutate` require one. To re-download the schema after API updates, run `npm run regenerate-schema`.
 
 ---
 
